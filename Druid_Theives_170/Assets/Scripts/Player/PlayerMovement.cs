@@ -13,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D body = null;
     private GameObject visual = null;
+    private Animator animator = null;
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         visual = transform.Find("Visual").gameObject;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
         if (xin < 0)
         {
             visual.transform.localScale = new Vector3(-1, 1, 1);
-        } else if (xin > 0)
+        }
+        else if (xin > 0)
         {
             visual.transform.localScale = new Vector3(1, 1, 1);
         }
@@ -41,6 +44,15 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             visual.transform.eulerAngles = new Vector3(0, 0, -xin*15);
+        }
+
+        if (body.velocity.magnitude < 0.05)
+        {
+            animator.Play("Idle");
+        }
+        else
+        {
+            animator.Play("Run");
         }
 
         Vector2 acc = new Vector2(xin * AccSpeed, 0.0f);
