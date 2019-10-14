@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MetaEvents : MonoBehaviour
 {
+    public GameObject playerprefab;
     private GameObject deathScreen;
     private ParticleSystem deathParticles;
     private GameObject visual;
     private Rigidbody2D playerBody;
-    private PlayerMovement playerMovement;
+    private PlayerMovementTopDown playerMovement;
 
     public void Start()
     {
@@ -16,7 +17,7 @@ public class MetaEvents : MonoBehaviour
         deathParticles = transform.Find("DeathParticles").gameObject.GetComponent<ParticleSystem>();
         visual = transform.Find("Visual").gameObject;
         playerBody = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovementTopDown>();
     }
 
     public void Die()
@@ -25,8 +26,6 @@ public class MetaEvents : MonoBehaviour
         deathScreen.SetActive(true);
         // emit death particles
         deathParticles.Emit(20);
-        // disable visual
-        visual.SetActive(false);
         // disable player movement
         playerMovement.Stop();
         playerBody.isKinematic = true;
@@ -35,6 +34,7 @@ public class MetaEvents : MonoBehaviour
 
     public void Reload()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        Instantiate(playerprefab);
+        Destroy(this.transform.gameObject);
     }
 }

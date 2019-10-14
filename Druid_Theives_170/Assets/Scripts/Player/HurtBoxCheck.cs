@@ -13,8 +13,9 @@ public class HurtBoxCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Hazard")
+        if (collision.gameObject.tag == "Hazard" && this.transform.parent.gameObject.tag  != "dead")
         {
+            this.transform.parent.gameObject.tag = "dead";
             meta.Die();
         }
     }
