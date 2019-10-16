@@ -5237,6 +5237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerprefab: {fileID: 6387371533736255975}
+  deadPlayerPrefab: {fileID: 3124833351509865759, guid: 8cbadb0843125f14d874344327e3c0d2,
+    type: 3}
 --- !u!95 &2686641170170988822
 Animator:
   serializedVersion: 3

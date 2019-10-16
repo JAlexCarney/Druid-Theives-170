@@ -25,6 +25,11 @@ public class CameraFollow : MonoBehaviour
         viewWidth = viewHeight * GetComponent<Camera>().aspect;
     }
 
+    public void setPlayer(GameObject newPlayer)
+    {
+        player = newPlayer;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {

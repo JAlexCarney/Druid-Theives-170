@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MetaEvents : MonoBehaviour
 {
-    public GameObject playerprefab;
     private GameObject deathScreen;
     private ParticleSystem deathParticles;
     private GameObject visual;
@@ -29,12 +28,18 @@ public class MetaEvents : MonoBehaviour
         // disable player movement
         playerMovement.Stop();
         playerBody.isKinematic = true;
-        Invoke("Reload", 2);
+        Invoke("Reload", 1);
     }
 
     public void Reload()
     {
-        Instantiate(playerprefab);
+        PrefabLoader pl = GameObject.FindGameObjectWithTag("PrefabLoader").GetComponent<PrefabLoader>();
+        GameObject newPlayer = Instantiate(pl.playerPrefab);
+        newPlayer.transform.position = new Vector3(0, -10, 0);
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        camera.GetComponent<CameraFollow>().setPlayer(newPlayer);
+        GameObject deadplayer = Instantiate(pl.deadPlayerPrefab);
+        deadplayer.transform.position = transform.position;
         Destroy(this.transform.gameObject);
     }
 }
