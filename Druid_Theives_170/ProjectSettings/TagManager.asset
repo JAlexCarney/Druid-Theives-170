@@ -8,6 +8,7 @@ TagManager:
   - Hazard
   - dead
   - PrefabLoader
+  - BossHealth
   layers:
   - Default
   - TransparentFX
